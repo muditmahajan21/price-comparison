@@ -29,7 +29,7 @@ const getProductsFromAmazon = async ({
         const product = products[i];
         
         // Get the product name
-        const name = $(product).find('.s-line-clamp-1').text();
+        const name = $(product).find('.a-text-normal').text();
         // Get the product price
         const price = $(product).find('.a-price-whole').text();
         
