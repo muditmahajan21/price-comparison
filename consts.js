@@ -1,10 +1,10 @@
 const websites = {
-  AMAZON: 'https://www.amazon.in',
-  FLIPKART: 'https://www.flipkart.com/',
-  SNAPDEAL: 'https://www.snapdeal.com/',
-  MEESHO: 'https://meesho.com/',
-  MYNTRA: 'https://www.myntra.com/',
-  ALL: `all`,
+  AMAZON: 'AMAZON',
+  FLIPKART: 'FLIPKART',
+  SNAPDEAL: 'SNAPDEAL',
+  MEESHO: 'MEESHO',
+  MYNTRA: 'MYNTRA',
+  ALL: `ALL`,
 };
 
 const sortTypes = {
