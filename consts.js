@@ -40,9 +40,9 @@ const sortValues = {
     HIGHEST_REVIEW: 'sort=popularity',
   },
   SNAPDEAL: {
-    PRICE_LOW_TO_HIGH: 'sort=rlvncy',
-    PRICE_HIGH_TO_LOW: 'sort=plrty',
-    HIGHEST_REVIEW: 'sort=phtl',
+    PRICE_LOW_TO_HIGH: 'sort=plth',
+    PRICE_HIGH_TO_LOW: 'sort=phtl',
+    HIGHEST_REVIEW: 'sort=plrty',
   },
   MEESHO: {
     PRICE_LOW_TO_HIGH: 'Sort[sort_by]=price&Sort[sort_order]=asc',

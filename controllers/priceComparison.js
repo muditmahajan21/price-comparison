@@ -2,6 +2,8 @@ const priceComparisonRouter = require('express').Router();
 const sortTypes = require('../consts').sortTypes;
 const websites = require('../consts').websites;
 const getProductsFromAmazon = require('./amazon');
+const getProductsFromFlipkart = require('./flipkart');
+const getProductsFromSnapdeal = require('./snapdeal');
 
 priceComparisonRouter.post('/', async (req, res) => {
   try {
@@ -52,6 +54,22 @@ priceComparisonRouter.post('/', async (req, res) => {
         switch (website) {
           case websites.AMAZON:
             return await getProductsFromAmazon({
+              search,
+              sortType,
+              websites,
+              isSecondHand,
+              limit,
+            });
+          case websites.FLIPKART:
+            return await getProductsFromFlipkart({
+              search,
+              sortType,
+              websites,
+              isSecondHand,
+              limit,
+            });
+          case websites.SNAPDEAL:
+            return await getProductsFromSnapdeal({
               search,
               sortType,
               websites,
