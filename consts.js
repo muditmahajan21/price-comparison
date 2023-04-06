@@ -3,6 +3,7 @@ const websites = {
   FLIPKART: 'FLIPKART',
   SNAPDEAL: 'SNAPDEAL',
   MEESHO: 'MEESHO',
+  RELIANCE: 'RELIANCE',
   ALL: `ALL`,
 };
 
@@ -16,6 +17,7 @@ const baseUrls = {
   AMAZON: 'https://www.amazon.in/s',
   FLIPKART: 'https://www.flipkart.com/search',
   SNAPDEAL: 'https://www.snapdeal.com/search',
+  RELIANCE: 'https://www.reliancedigital.in/search',
   MEESHO: 'https://www.meesho.com/search?searchType=manual&searchIdentifier=text_search',
 };
 
@@ -23,6 +25,7 @@ const searchParams = {
   AMAZON: 'k',
   FLIPKART: 'q',
   SNAPDEAL: 'keyword',
+  RELIANCE: 'q',
   MEESHO: 'q',
 };
 
@@ -41,6 +44,11 @@ const sortValues = {
     PRICE_LOW_TO_HIGH: 'sort=plth',
     PRICE_HIGH_TO_LOW: 'sort=phtl',
     HIGHEST_REVIEW: 'sort=plrty',
+  },
+  RELIANCE: {
+    PRICE_LOW_TO_HIGH: 'price-asc',
+    PRICE_HIGH_TO_LOW: 'price-desc',
+    HIGHEST_REVIEW: 'relevance',
   },
   MEESHO: {
     PRICE_LOW_TO_HIGH: 'Sort[sort_by]=price&Sort[sort_order]=asc',
