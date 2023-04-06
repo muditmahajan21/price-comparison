@@ -3,7 +3,6 @@ const websites = {
   FLIPKART: 'FLIPKART',
   SNAPDEAL: 'SNAPDEAL',
   MEESHO: 'MEESHO',
-  MYNTRA: 'MYNTRA',
   ALL: `ALL`,
 };
 
@@ -18,7 +17,6 @@ const baseUrls = {
   FLIPKART: 'https://www.flipkart.com/search',
   SNAPDEAL: 'https://www.snapdeal.com/search',
   MEESHO: 'https://www.meesho.com/search?searchType=manual&searchIdentifier=text_search',
-  MYNTRA: 'https://www.myntra.com/',
 };
 
 const searchParams = {
@@ -48,11 +46,6 @@ const sortValues = {
     PRICE_LOW_TO_HIGH: 'Sort[sort_by]=price&Sort[sort_order]=asc',
     PRICE_HIGH_TO_LOW: 'Sort[sort_by]=price&Sort[sort_order]=desc',
     HIGHEST_REVIEW: 'Sort[sort_by]=rating&Sort[sort_order]=desc',
-  },
-  MYNTRA: {
-    PRICE_LOW_TO_HIGH: 'sort=price_asc',
-    PRICE_HIGH_TO_LOW: 'sort=price_desc',
-    HIGHEST_REVIEW: 'sort=Customer Rating',
   },
 }
 

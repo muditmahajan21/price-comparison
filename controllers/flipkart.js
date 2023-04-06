@@ -35,7 +35,7 @@ const getProductsFromFlipkart = async ({
     let url = $(product).find('._1fQZEK').attr('href');
     url = `https://www.flipkart.com${url}`;
 
-    // if (name && price && rating && url) {
+    if (name && price && rating && url) {
       productsArray.push({
         name,
         price,
@@ -43,7 +43,7 @@ const getProductsFromFlipkart = async ({
         url,
         website: websites.FLIPKART,
       });
-    // }
+    }
   }
 
   return productsArray;

@@ -13,11 +13,14 @@ const getProductsFromAmazon = async ({
 }) => {
   // Visit the amazon website and search for the product
   const response = await axios.get(
-      `${baseUrls.AMAZON}?${searchParams.AMAZON}=${search}&${sortValues.AMAZON[sortType]}`
-      );
+      `${baseUrls.AMAZON}?${searchParams.AMAZON}=${search}&${sortValues.AMAZON[sortType]}`, {
+        headers: {
+          Accept: "application/json",
+          "User-Agent": "axios 0.21.1"
+        }
+      });
       // Load the HTML content of the page
       const $ = cheerio.load(response.data);
-        
       // Get the products from the page
       const products = $('.s-result-item');
       // Array to store the products
