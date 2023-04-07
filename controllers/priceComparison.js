@@ -1,11 +1,12 @@
 const priceComparisonRouter = require('express').Router();
+const Product = require('../models/product');
 const sortTypes = require('../consts').sortTypes;
 const websites = require('../consts').websites;
-const getProductsFromAmazon = require('./amazon');
-const getProductsFromFlipkart = require('./flipkart');
-const getProductsFromSnapdeal = require('./snapdeal');
-const getProductsFromReliance = require('./reliance');
-const getProductsFromNykaa = require('./nykaa');
+const getProductsFromAmazon = require('../parsers/amazon');
+const getProductsFromFlipkart = require('../parsers/flipkart');
+const getProductsFromSnapdeal = require('../parsers/snapdeal');
+const getProductsFromReliance = require('../parsers/reliance');
+const getProductsFromNykaa = require('../parsers/nykaa');
 
 priceComparisonRouter.post('/', async (req, res) => {
   try {
@@ -51,58 +52,33 @@ priceComparisonRouter.post('/', async (req, res) => {
     }
 
     // For each website, get the products from that website
-    const products = await Promise.all(
+    let products = await Promise.all(
       queryWebsiyes.map(async (website) => {
         switch (website) {
           case websites.AMAZON:
-            return await getProductsFromAmazon({
-              search,
-              sortType,
-              websites,
-              isSecondHand,
-              limit,
-            });
+            return await getProductsFromAmazon(req.body);
           case websites.FLIPKART:
-            return await getProductsFromFlipkart({
-              search,
-              sortType,
-              websites,
-              isSecondHand,
-              limit,
-            });
+            return await getProductsFromFlipkart(req.body);
           case websites.SNAPDEAL:
-            return await getProductsFromSnapdeal({
-              search,
-              sortType,
-              websites,
-              isSecondHand,
-              limit,
-            });
+            return await getProductsFromSnapdeal(req.body);
           case websites.RELIANCE:
-            return await getProductsFromReliance({
-              search,
-              sortType,
-              websites,
-              isSecondHand,
-              limit,
-            });
+            return await getProductsFromReliance(req.body);
           case websites.NYKAA:
-            return await getProductsFromNykaa({
-              search,
-              sortType,
-              websites,
-              isSecondHand,
-              limit,
-            });
+            return await getProductsFromNykaa(req.body);
             default:
               return [];
           }
         })
     );    
+    
+    // Save all products in the database
+    await Product.insertMany(products.flat());
 
-    res.status(200).json({ search, sortType, websites: queryWebsiyes, isSecondHand, limit, products });
+    products = products.flat();
+
+    res.status(200).json({ products, total_products_considered: products.length });
   } catch (error) {
-    console.log(error);
+    console.error(error);
     res.status(500).json({ error: 'Internal Server Error' });
   }
 });

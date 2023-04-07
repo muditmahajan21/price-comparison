@@ -2,7 +2,6 @@ const websites = {
   AMAZON: 'AMAZON',
   FLIPKART: 'FLIPKART',
   SNAPDEAL: 'SNAPDEAL',
-  MEESHO: 'MEESHO',
   NYKAA: 'NYKAA',
   RELIANCE: 'RELIANCE',
   ALL: `ALL`,
@@ -20,7 +19,6 @@ const baseUrls = {
   SNAPDEAL: 'https://www.snapdeal.com/search',
   RELIANCE: 'https://www.reliancedigital.in/search',
   NYKAA: 'https://www.nykaa.com/search/result/',
-  MEESHO: 'https://www.meesho.com/search?searchType=manual&searchIdentifier=text_search',
 };
 
 const searchParams = {
@@ -29,7 +27,6 @@ const searchParams = {
   SNAPDEAL: 'keyword',
   RELIANCE: 'q',
   NYKAA: 'q',
-  MEESHO: 'q',
 };
 
 const sortValues = {
@@ -58,11 +55,43 @@ const sortValues = {
     PRICE_HIGH_TO_LOW: 'sort=price_desc',
     HIGHEST_REVIEW: 'sort=customer_top_rated',
   },
-  MEESHO: {
-    PRICE_LOW_TO_HIGH: 'Sort[sort_by]=price&Sort[sort_order]=asc',
-    PRICE_HIGH_TO_LOW: 'Sort[sort_by]=price&Sort[sort_order]=desc',
-    HIGHEST_REVIEW: 'Sort[sort_by]=rating&Sort[sort_order]=desc',
+}
+
+const classNames = {
+  AMAZON: {
+    PRODUCTS: '.s-result-item',
+    NAME: '.a-text-normal',
+    PRICE: '.a-price-whole',
+    RATING: '.a-icon-alt',
+    URL: '.a-link-normal',
   },
+  FLIPKART: {
+    PRODUCTS: '._2kHMtA',
+    NAME: '._4rR01T',
+    PRICE: '._30jeq3',
+    RATING: '._3LWZlK',
+    URL: '._1fQZEK',
+  },
+  SNAPDEAL: {
+    PRODUCTS: '.product-tuple-listing',
+    NAME: '.product-title',
+    PRICE: '.lfloat.product-price',
+    RATING: '.product-rating-count',
+    URL: '.dp-widget-link',
+  },
+  RELIANCE: {
+    PRODUCTS: '.sp__product',
+    NAME: '.sp__name',
+    PRICE: '.TextWeb__Text-sc-1cyx778-0 gimCrs',
+    RATING: '.sp__product-rating',
+  },
+  NYKAA: {
+    PRODUCTS: '.productWrapper',
+    NAME: '.css-xrzmfa',
+    PRICE: '.css-111z9ua',
+    RATING: '.a-icon-alt',
+    URL: '.css-qlopj4',
+  }
 }
 
 module.exports = {
@@ -71,4 +100,5 @@ module.exports = {
   baseUrls,
   searchParams,
   sortValues,
+  classNames,
 };

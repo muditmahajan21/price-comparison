@@ -1,13 +1,12 @@
 const mongoose = require('mongoose');
 
 const productSchema = new mongoose.Schema({
-  title: {
+  name: {
     type: String,
     required: true
   },
   url: {
     type: String,
-    required: true
   },
   total_review_count: {
     type: Number,
@@ -16,8 +15,7 @@ const productSchema = new mongoose.Schema({
     type: Number,
   },
   price: {
-    type: Number,
-    required: true
+    type: String,
   },
   website: {
     type: String,
