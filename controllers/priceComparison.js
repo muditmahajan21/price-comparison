@@ -5,6 +5,7 @@ const getProductsFromAmazon = require('./amazon');
 const getProductsFromFlipkart = require('./flipkart');
 const getProductsFromSnapdeal = require('./snapdeal');
 const getProductsFromReliance = require('./reliance');
+const getProductsFromNykaa = require('./nykaa');
 
 priceComparisonRouter.post('/', async (req, res) => {
   try {
@@ -79,6 +80,14 @@ priceComparisonRouter.post('/', async (req, res) => {
             });
           case websites.RELIANCE:
             return await getProductsFromReliance({
+              search,
+              sortType,
+              websites,
+              isSecondHand,
+              limit,
+            });
+          case websites.NYKAA:
+            return await getProductsFromNykaa({
               search,
               sortType,
               websites,

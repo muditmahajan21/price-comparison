@@ -3,6 +3,7 @@ const websites = {
   FLIPKART: 'FLIPKART',
   SNAPDEAL: 'SNAPDEAL',
   MEESHO: 'MEESHO',
+  NYKAA: 'NYKAA',
   RELIANCE: 'RELIANCE',
   ALL: `ALL`,
 };
@@ -18,6 +19,7 @@ const baseUrls = {
   FLIPKART: 'https://www.flipkart.com/search',
   SNAPDEAL: 'https://www.snapdeal.com/search',
   RELIANCE: 'https://www.reliancedigital.in/search',
+  NYKAA: 'https://www.nykaa.com/search/result/',
   MEESHO: 'https://www.meesho.com/search?searchType=manual&searchIdentifier=text_search',
 };
 
@@ -26,6 +28,7 @@ const searchParams = {
   FLIPKART: 'q',
   SNAPDEAL: 'keyword',
   RELIANCE: 'q',
+  NYKAA: 'q',
   MEESHO: 'q',
 };
 
@@ -49,6 +52,11 @@ const sortValues = {
     PRICE_LOW_TO_HIGH: 'price-asc',
     PRICE_HIGH_TO_LOW: 'price-desc',
     HIGHEST_REVIEW: 'relevance',
+  },
+  NYKAA: {
+    PRICE_LOW_TO_HIGH: 'sort=price_asc',
+    PRICE_HIGH_TO_LOW: 'sort=price_desc',
+    HIGHEST_REVIEW: 'sort=customer_top_rated',
   },
   MEESHO: {
     PRICE_LOW_TO_HIGH: 'Sort[sort_by]=price&Sort[sort_order]=asc',
