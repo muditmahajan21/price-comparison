@@ -132,14 +132,18 @@ priceComparisonRouter.post('/', async (req, res) => {
     await Product.insertMany(products);
 
     // Remove search query and sort type from the products
-    products = products.map((product) => {
-      delete product.searchQuery;
-      delete product.sortType;
-      return product;
-    });
+    
     
     products = products.concat(productsFromDatabase);
-
+    products = products.map((product) => {
+      return {
+        name: product.name,
+        url: product.url,
+        rating: product.rating,
+        price: product.price,
+        website: product.website,
+      }
+    });
     // Sort the products according to the sort type
     products.sort((a, b) => {
       if (sortType === sortTypes.PRICE_LOW_TO_HIGH) {
