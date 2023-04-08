@@ -38,3 +38,8 @@ A price Comparison API as part of Durinpay Assignment.
 + Add multiple methods of parsing on websites to make parsers more robust.
 + Refactor the application to Typescript / NestJS.
 + Optimise the API performance.
+
+## Endpoints
+Base Url: https://price-comparison-durinpay.cyclic.app/api
++ **POST** Price Comparison: 
+  + /price-comparison
