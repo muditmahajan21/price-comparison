@@ -33,8 +33,8 @@ const getProductsFromSnapdeal = async ({
 
       const name = $(product).find(classNames.SNAPDEAL.NAME).text();
 
-      const price = $(product).find(classNames.SNAPDEAL.PRICE).text();
-
+      let price = $(product).find(classNames.SNAPDEAL.PRICE).text();
+      price = Number(price.replace(/[^0-9]/g, ''));
       let ratingDiv = $(product)?.find(classNames.SNAPDEAL.RATING).attr('style');
       let rating = ratingDiv?.substring(6, 9);
 

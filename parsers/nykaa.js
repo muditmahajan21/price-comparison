@@ -27,7 +27,8 @@ const getProductsFromNykaa = async ({
       const product = products[i];
 
       const name = $(product).find(classNames.NYKAA.NAME).text();
-      const price = $(product).find(classNames.NYKAA.PRICE).text();
+      let price = $(product).find(classNames.NYKAA.PRICE).text();
+      price = Number(price.replace(/[^0-9]/g, ''));
 
       let rating = $(product).find(classNames.NYKAA.RATING).text();
       rating = rating.substring(0, 3);

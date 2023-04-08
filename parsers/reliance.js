@@ -27,8 +27,9 @@ const getProductsFromReliance = async ({
       const product = products[i];
 
       const name = $(product).find(classNames.RELIANCE.NAME).text();
-      const price = $(product).find(classNames.RELIANCE.PRICE).text();
-
+      let price = $(product).find(classNames.RELIANCE.PRICE).text();
+      price = Number(price.replace(/[^0-9]/g, ''));
+      
       let rating = $(product)?.find(classNames.RELIANCE.RATING)?.text();
       rating = rating?.substring(0, 3);
       let url = $(product).parent().attr('href');

@@ -37,7 +37,7 @@ const getProductsFromAmazon = async ({
       let price = $(product).find(classNames.AMAZON.PRICE).text();
 
       // Convert price from en-In number format to number
-      // price = Number(price.replace(/[^0-9.-]+/g, ''));
+      price = Number(price.replace(/[^0-9.-]+/g, ''));
 
       // Get the product rating
       let rating = $(product).find(classNames.AMAZON.RATING).text();

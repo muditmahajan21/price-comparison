@@ -33,10 +33,13 @@ const getProductsFromFlipkart = async ({
 
       const name = $(product).find(classNames.FLIPKART.NAME).text();
 
-      const price = $(product).find(classNames.FLIPKART.PRICE).text();
+      let price = $(product).find(classNames.FLIPKART.PRICE).text();
+      // Get all the numbers from the price and convert it to a number from En-In to number
+      price = Number(price.replace(/[^0-9]/g, ''));
 
-      const rating = $(product).find(classNames.FLIPKART.RATING).text();
-
+      let rating = $(product).find(classNames.FLIPKART.RATING).text();
+      // Get all the numbers from the rating and convert it to a number from En-In to number
+      rating = Number(rating.replace(/[^0-9.-]+/g, ''));
       let url = $(product).find(classNames.FLIPKART.URL).attr('href');
       url = `https://www.flipkart.com${url}`;
 
