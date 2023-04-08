@@ -2,7 +2,7 @@
 
 A price Comparison API as part of Durinpay Assignment.
 
-**Postman Documentation: [Postman Collection](https://www.postman.com/minor-project-juit/workspace/price-comparison/collection/13813135-c12aa3d4-9e53-43f2-ab1d-2fc82a368aa8?action=share&creator=13813135)**
+**Postman Documentation: [Postman Collection](https://documenter.getpostman.com/view/13813135/2s93XsWknJ)**
 
 **Hosted URL: [Backend Link](https://price-comparison-durinpay.cyclic.app)**
 
