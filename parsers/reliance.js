@@ -28,7 +28,11 @@ const getProductsFromReliance = async ({
 
       const name = $(product).find(classNames.RELIANCE.NAME).text();
       let price = $(product).find(classNames.RELIANCE.PRICE).text();
-      price = Number(price.replace(/[^0-9]/g, ''));
+      
+      // Take the first number present between the ₹ symbols4
+      price = price.match(/(?<=₹)(.*?)(?=₹)/g);
+
+      price = Number(price[0].replace(/[^0-9.-]+/g, ''));
       
       let rating = $(product)?.find(classNames.RELIANCE.RATING)?.text();
       rating = rating?.substring(0, 3);

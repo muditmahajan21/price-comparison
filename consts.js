@@ -82,7 +82,7 @@ const classNames = {
   RELIANCE: {
     PRODUCTS: '.sp__product',
     NAME: '.sp__name',
-    PRICE: '.TextWeb__Text-sc-1cyx778-0 gimCrs',
+    PRICE: '.TextWeb__Text-sc-1cyx778-0',
     RATING: '.sp__product-rating',
   },
   NYKAA: {

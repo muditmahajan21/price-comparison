@@ -50,46 +50,58 @@ priceComparisonRouter.post('/', async (req, res) => {
       queryWebsiyes.splice(queryWebsiyes.indexOf(websites.ALL), 1);
     }
 
-    let products = [];
     // Check in the databse if the search query and sort type is already present according to the limit
     // If it is present, return the products from the database instead of scraping the websites again
     // Also take care of the websites to include all the ones mentioned in the request
 
     // If the search query and sort type is already present in the database
+    console.log('Getting products from database');
     const productsFromDatabase = await Product.find({
       searchQuery: search,
       sortType: sortType,
       website: { $in: queryWebsiyes },
     })
-      .limit(limit);
+      .limit(limit * websites.length);
 
-    productsFromDatabase.sort((a, b) => {
-      if (sortType === sortTypes.PRICE_LOW_TO_HIGH) {
-        return a.price - b.price;
-      } else if (sortType === sortTypes.PRICE_HIGH_TO_LOW) {
-        return b.price - a.price;
-      } else if (sortType === sortTypes.RATING) {
-        return b.rating - a.rating;
-      }
-    });
+    // Get all the websites used found in the database for the search query and sort type
+    const websitesUsed = productsFromDatabase.map((product) => product.website);
+    // Get the websites that are not used in the database
+    const websitesNotUsed = queryWebsiyes.filter((website) => !websitesUsed.includes(website));
 
-    if (productsFromDatabase.length === limit) {
-      // Remove searchQuery and sortType from the products and add total_products_considered
-      products = productsFromDatabase.map((product) => {
-        return {
-          name: product.name,
-          url: product.url,
-          rating: product.rating,
-          price: product.price,
-          website: product.website,
+    if (websitesNotUsed.length === 0) {
+      productsFromDatabase.sort((a, b) => {
+        if (sortType === sortTypes.PRICE_LOW_TO_HIGH) {
+          return a.price - b.price;
+        } else if (sortType === sortTypes.PRICE_HIGH_TO_LOW) {
+          return b.price - a.price;
+        } else if (sortType === sortTypes.RATING) {
+          return b.rating - a.rating;
         }
       });
-      res.status(200).json({ products, total_products_considered: limit });
-      return;
+
+      if (productsFromDatabase.length >= limit) {
+        // Remove searchQuery and sortType from the products and add total_products_considered
+        let productsToSend = productsFromDatabase.map((product) => {
+          return {
+            name: product.name,
+            url: product.url,
+            rating: product.rating,
+            price: product.price,
+            website: product.website,
+          }
+        });
+        const total = productsToSend.length;
+        productsToSend = productsToSend.slice(0, limit);
+        res.status(200).json({ productsToSend, total_products_considered: total });
+        return;
+      }
     }
-    console.log('Scraping websites');
+
+    // Put the websites that are not used in the database in the queryWebsites array
+    queryWebsiyes = websitesNotUsed;
+    console.log('Scraping websites', queryWebsiyes);
     // For each website, get the products from that website
-    products = await Promise.all(
+    let products = await Promise.all(
       queryWebsiyes.map(async (website) => {
         switch (website) {
           case websites.AMAZON:
@@ -108,13 +120,15 @@ priceComparisonRouter.post('/', async (req, res) => {
         })
     );    
     
-    products = products.flat();
+    // Add the products from the database to the products array
 
+    products = products.flat();
     products = products.map((product) => {
       product.searchQuery = search;
       product.sortType = sortType;
       return product;
     });
+    console.log('Saving products to database');
     await Product.insertMany(products);
 
     // Remove search query and sort type from the products
@@ -123,6 +137,8 @@ priceComparisonRouter.post('/', async (req, res) => {
       delete product.sortType;
       return product;
     });
+    
+    products = products.concat(productsFromDatabase);
 
     // Sort the products according to the sort type
     products.sort((a, b) => {
@@ -135,10 +151,11 @@ priceComparisonRouter.post('/', async (req, res) => {
       }
     });
 
+    const total = products.length;
     // Limit the products to the limit mentioned in the request
     products = products.slice(0, limit);
 
-    res.status(200).json({ products, total_products_considered: products.length });
+    res.status(200).json({ products, total_products_considered: total });
   } catch (error) {
     console.error(error);
     res.status(500).json({ error: 'Internal Server Error' });
