@@ -13,7 +13,6 @@ priceComparisonRouter.post('/', async (req, res) => {
     const search = req.body.search;
     const sortType = req.body.sortType;
     let queryWebsiyes = req.body.websites ? req.body.websites : [websites.ALL];
-    const isSecondHand = req.body?.isSecondHand ? req.body?.isSecondHand : false;
     const limit = req.body?.limit ? req.body?.limit : 3;
 
     if (!search) {
@@ -71,10 +70,21 @@ priceComparisonRouter.post('/', async (req, res) => {
         })
     );    
     
-    // Save all products in the database
-    await Product.insertMany(products.flat());
-
     products = products.flat();
+
+    products = products.map((product) => {
+      product.searchQuery = search;
+      product.sortType = sortType;
+      return product;
+    });
+    await Product.insertMany(products);
+
+    // Remove search query and sort type from the products
+    products = products.map((product) => {
+      delete product.searchQuery;
+      delete product.sortType;
+      return product;
+    });
 
     res.status(200).json({ products, total_products_considered: products.length });
   } catch (error) {

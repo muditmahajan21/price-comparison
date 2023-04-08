@@ -1,6 +1,12 @@
 const mongoose = require('mongoose');
 
 const productSchema = new mongoose.Schema({
+  searchQuery: {
+    type: String,
+  },
+  sortType: {
+    type: String,
+  },
   name: {
     type: String,
     required: true

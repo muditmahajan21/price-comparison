@@ -9,7 +9,6 @@ const websites = require('../consts').websites;
 const getProductsFromReliance = async ({
   search,
   sortType,
-  isSecondHand,
   limit,
 }) => {
   try {
